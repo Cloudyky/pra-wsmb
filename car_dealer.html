@@ -1,46 +1,50 @@
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
 <html xmlns="http://www.w3.org/1999/xhtml">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
-<title>Car Dealer</title>
-	<link rel="stylesheet" href="dealer.css" type="text/css" />
-	<script type="text/javascript" language="javascript" src="jquery/js/jquery-1.8.3.js"></script>
-	<script type="text/javascript" language="javascript" src="jquery/js/jquery-ui-1.9.2.custom.js"></script>
-    <script type="text/javascript" language="javascript" src="dealer.js"></script>
-</head>
+	<head>
+		<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+		<title>Car Dealer</title>
+		<link rel="stylesheet" href="dealer.css" type="text/css" />
+		<script type="text/javascript" language="javascript" src="jquery/js/jquery-1.8.3.js"></script>
+		<script type="text/javascript" language="javascript" src="jquery/js/jquery-ui-1.9.2.custom.js"></script>
+		<script type="text/javascript" language="javascript" src="dealer.js"></script>
+	</head>
 
-<body>
-	<div id="salon">
-    	<div id="clients_queue">
-        	clients queue
-        </div>
-    	<div id="cars_place">
-        	<div id="porsche" class="place">
-			Place for Porsche cars
-            </div>
-        	<div id="volkswagen" class="place">
-			Place for Volkswagen cars
-            </div>
-        	<div id="audi" class="place">
-			Place for Audi cars
-            </div>
-        	<div id="bmw" class="place">
-			Place for BMW cars
-            </div>
-        </div>
-        <div id="cashier">
-        	cashier
-        </div>
-        <div id="exit">
-        	exit
-        </div>
-        <div id="display">
-        	<ul>
-            	<li id="clients_served">10 clients</li>
-				<li id="cars_sold">10 cars</li>
-                <li id="amount">€ 120.000,00</li>
-            </ul>    
-        </div>
-    </div>
-</body>
+	<body>
+
+		<div class="header">
+			<div class="brand-name">AZ Auto Enterprise</div>
+			<ul class="header-right">
+				<li class="served-client">
+					Total Customer Served: <span id="served-client-count">0</span> Customer
+				</li>
+				<li class="sales-amount">
+					Total Sales Amount: RM <span id="sales-total">0</span>
+				</li>
+			</ul>
+		</div>
+
+		<div class="client-queue-container">
+			<div class="queue-total">
+				Customer in queue: <span id="client-queue-totals">0</span>
+			</div>
+			<div class="client-queue-list">
+				<!-- client baru klr kat sini -->
+			</div>
+		</div>
+
+		<div class="car-container">
+			<div class="car-brand porche">
+				<div class="car-info">
+					<span>Porche</span>
+					<span>
+						Available car: <span class="available-porche">0</span>
+					</span>
+				</div>
+				<div class="brand-section">
+					
+				</div>
+			</div>
+		</div>
+
+	</body>
 </html>
