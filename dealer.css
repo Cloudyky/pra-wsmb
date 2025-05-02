@@ -78,15 +78,42 @@ body{
 	margin: 20px 0;
 	border-radius: 10px;
 	padding: 20px;
+	display: grid;
+	grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+	gap: 20px;
 }
 
 .car-brand{
-	background-color: rgb(176, 176, 176);
-	border-radius: 10px;
-	padding: 10px;
+	display: flex;
+	flex-direction: column;
+	gap: 10px;
 }
 
 .car-info{
+	background-color: rgb(176, 176, 176);
+	border-radius: 10px;
 	display: flex;
 	gap: 20px;
+	padding: 10px;
+}
+
+.brand-section{
+	background-color: rgb(176, 176, 176);
+	padding: 10px;
+	border-radius: 10px;
+}
+
+.f{
+	display: flex;
+}
+
+.e{
+	background-color: rgb(179, 153, 153);
+	border-radius: 10px;
+	padding: 40px;
+	width: 200px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	margin: 10px;
 }

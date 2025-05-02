@@ -24,6 +24,23 @@ function newClient() {
 	setTimeout(function () { newClient(); }, time);
 }
 
+function car() {
+	var carAvailable = {
+		Porsche: 4,
+		Volkswagen: 6,
+		Audi: 5,
+		BMW: 3
+	};
+
+	$(".available-porche").text(carAvailable["Porsche"]);
+	$(".available-volkswagen").text(carAvailable["Volkswagen"]);
+	$(".available-audi").text(carAvailable["Audi"]);
+	$(".available-bmw").text(carAvailable["BMW"]);
+}
+
+
 $("document").ready(function(e) {
+	// alert("Welcome to the car dealer!");
 	newClient();
+	car();
 });
