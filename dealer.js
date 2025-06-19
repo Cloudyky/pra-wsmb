@@ -1,29 +1,24 @@
-var brandlist = new Array("Porsche","Volkswagen","Audi","BMW");
+var brandlist = ["Porsche", "Volkswagen", "Audi", "BMW"];
+var totalSales = 0;
+var clientServed = 0;
 
 function newClient() {
-	var preference = Math.floor((Math.random() * 4));
-	var time = Math.floor((Math.random() * 10000) + 1);
-	var client = Math.floor((Math.random() * 10) + 1);
+	var preference = Math.floor(Math.random() * 4);
+	var time = Math.floor(Math.random() * 10000) + 1;
+	var client = Math.floor(Math.random() * 10) + 1;
 
-	// limit kan client max 10 je 
 	if ($(".client-queue-list .client").length < 10) {
-		$(".client-queue-list").append(
-			`
-				<div class="client client-${client}">
-					<div class="client-name">Customer for ${brandlist[preference]}</div>
-					<div class="client-img">
-						<img src="images/client_${client}.jpg" alt="client-img" srcset="">
-					</div>
-				</div>
-			`
-		);
+		$(".client-queue-list").append(`
+			<div class="client" id="client-${client}">
+				<div class="client-name">Customer for ${brandlist[preference]}</div>
+				<img src="images/client_${client}.jpg" alt="client-img">
+			</div>
+		`);
 
 		$("#client-queue-totals").text($(".client-queue-list .client").length);
 	}
 
-	setTimeout(function() { 
-		newClient(); 
-	}, time);
+	setTimeout(() => newClient(), time);
 }
 
 function car() {
@@ -42,22 +37,10 @@ function car() {
 
 function generateCars() {
 	const brands = {
-		Porsche: {
-			count: 4,
-			price: 65000000
-		},
-		Volkswagen: {
-			count: 6,
-			price: 18000000
-		},
-		Audi: {
-			count: 5,
-			price: 30000000
-		},
-		BMW: {
-			count: 3,
-			price: 25000000
-		}
+		Porsche: { count: 4, price: 65000000 },
+		Volkswagen: { count: 6, price: 18000000 },
+		Audi: { count: 5, price: 30000000 },
+		BMW: { count: 3, price: 25000000 }
 	};
 
 	for (let brand in brands) {
@@ -70,24 +53,56 @@ function generateCars() {
 					<img src="images/${brand}_${i}.jpg" alt="" class="car-img">
 					<div class="info">
 						<div class="client-place">Put customer here</div>
-						<span class="car-price">RM ${brands[brand].price.toLocaleString(undefined, {minimumFractionDigits: 2})}</span>
+						<span class="car-price">RM ${brands[brand].price.toLocaleString(undefined, { minimumFractionDigits: 2 })}</span>
 					</div>
 				</div>
 			`);
 		}
 	}
-
-	$(".available-porche").text(carAvailable["Porsche"]);
-	$(".available-volkswagen").text(carAvailable["Volkswagen"]);
-	$(".available-audi").text(carAvailable["Audi"]);
-	$(".available-bmw").text(carAvailable["BMW"]);
 }
 
-
-
-$("document").ready(function(e) {
-	// alert("Welcome to the car dealer!");
+$(document).ready(function () {
 	newClient();
 	car();
 	generateCars();
+
+	// Make customers draggable
+	$(document).on("mouseenter", ".client", function () {
+		$(this).draggable({
+			revert: "invalid",
+			helper: "clone",
+			start: function () {
+				$(this).css("opacity", 0.5);
+			},
+			stop: function () {
+				$(this).css("opacity", 1);
+			}
+		});
+	});
+
+	// Make client-place droppable
+	$(document).on("mouseenter", ".client-place", function () {
+		$(this).droppable({
+			accept: ".client",
+			drop: function (event, ui) {
+				let client = ui.draggable;
+				let priceText = $(this).siblings(".car-price").text();
+				let price = parseFloat(priceText.replace("RM", "").replace(/,/g, "").trim());
+
+				$(this).html(client.clone().removeClass("client").css({
+					width: "100%",
+					height: "100%"
+				}));
+
+				client.remove();
+
+				clientServed++;
+				totalSales += price;
+
+				$("#served-client-count").text(clientServed);
+				$("#sales-total").text(totalSales.toLocaleString(undefined, { minimumFractionDigits: 2 }));
+				$("#client-queue-totals").text($(".client-queue-list .client").length);
+			}
+		});
+	});
 });
